@@ -1,0 +1,31 @@
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+  <!-- Filtre par Classe -->
+  <div>
+    <label class="block text-sm font-semibold mb-1">Classe</label>
+    <select class="px-3 py-1 rounded border border-gray-300 bg-white">
+      <option value="">L3-GLRS</option>
+      <option value="">L3-IAGE</option>
+      <option value="">L3-MAIE</option>
+      <option value="">L3-MOSIEF</option>
+    </select>
+  </div>
+
+  <!-- Filtre par Statut -->
+  <div>
+    <label class="block text-sm font-semibold mb-1">Statut</label>
+    <div class="flex gap-2 flex-wrap">
+      <button
+        data-statut="up-to-date"
+        class="filter-statut px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
+      >
+        À jour
+      </button>
+      <button
+        data-statut="not-up-to-date"
+        class="filter-statut px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
+      >
+        Pas à jour
+      </button>
+    </div>
+  </div>
+</div>
