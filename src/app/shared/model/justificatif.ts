@@ -2,7 +2,7 @@ import { Presence } from './presence';
 
 
 export interface Justificatif {
-    id?: string;
+    id?: number;
     motif?: string;
     validation?: boolean;
     presence?: Presence;

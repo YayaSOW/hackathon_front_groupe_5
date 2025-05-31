@@ -5,7 +5,7 @@ import { Cours } from './cours';
 
 
 export interface Presence {
-    id?: string;
+    id?: number;
     date?: string;
     typePresence?: Presence.TypePresenceEnum;
     justificatifs?: Array<Justificatif>;

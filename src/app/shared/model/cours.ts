@@ -2,7 +2,7 @@ import { Presence } from './presence';
 
 
 export interface Cours {
-    id?: string;
+    id?: number;
     date?: string;
     nomCours?: string;
     duree?: number;
