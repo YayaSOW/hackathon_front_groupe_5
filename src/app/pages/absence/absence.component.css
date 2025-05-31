@@ -1,0 +1,18 @@
+h2 {
+  text-align: center;
+  color: #ff4d4f;
+}
+.btn {
+  display: block;
+  width: 200px;
+  margin: 20px auto;
+  padding: 10px;
+  text-align: center;
+  background-color: #ff4d4f;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.btn:hover {
+  background-color: #d9363e;
+}
