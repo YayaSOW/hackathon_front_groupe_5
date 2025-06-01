@@ -1,11 +1,7 @@
-import { Admin } from './admin';
+import { User } from './user';
 
-export interface LoginCredentials {
-  login: string;
-  password: string;
-}
-
-export interface AuthResponse {
-  token: string;
-  user: Admin;
+export interface LoginResponse {
+  message: string;
+  success: boolean;
+  data: User | null;
 }
