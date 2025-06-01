@@ -19,7 +19,7 @@ export const routes: Routes = [
     children: [
       { path: 'etudiant', component: EtudiantListPageComponent },
       { path: 'absence', component: AbsenceListPageComponent },
-      { path: 'item', component: AbsenceItemComponent },
+      { path: 'absence/:id', component: AbsenceItemComponent },
       { path: 'retard', component: RetardListPageComponent },
     ]
   },

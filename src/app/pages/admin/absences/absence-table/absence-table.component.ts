@@ -28,7 +28,12 @@ export class AbsenceTableComponent implements OnInit {
       });
   }
 
-  onViewDetails(){
-    this.router.navigateByUrl('item');
+  onViewDetails(id?: number) {
+    if (id !== undefined) {
+      this.router.navigateByUrl(`absence/${id}`);
+    } else {
+      console.error("ID d'absence non défini");
+    }
   }
+
 }

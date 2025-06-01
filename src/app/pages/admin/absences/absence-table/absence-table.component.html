@@ -19,7 +19,8 @@
       <td class="p-2.5">{{ absence.etudiant?.prenom }}</td>
       <td class="p-2.5">{{ absence.cours?.nomCours }}</td>
       <td class="p-2.5">
-        <button (click)="onViewDetails()" class="bg-[#351D15] text-white rounded-sm text-sm p-2">Voir Détails</button>
+        <button (click)="onViewDetails(absence.id)"
+                class="bg-[#351D15] text-white rounded-sm text-sm p-2">Voir Détails</button>
       </td>
     </tr>
   </tbody>
