@@ -10,45 +10,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="mb-2">
-      <td class="p-2.5">The Sliding Mr. Bones</td>
-      <td class="p-2.5">Malcolm Lockyer</td>
-      <td class="p-2.5">1961</td>
-      <td class="p-2.5">1961</td>
-      <td class="p-2.5">1961</td>
-      <td class="p-2.5">1961</td>
-    </tr>
-    <tr class="mb-2">
-      <td class="p-2.5">The Sliding Mr. Bones</td>
-      <td class="p-2.5">Malcolm Lockyer</td>
-      <td class="p-2.5">1961</td>
-      <td class="p-2.5">1961</td>
-      <td class="p-2.5">1961</td>
-      <td class="p-2.5">1961</td>
-    </tr>
-    <tr class="mb-2">
-      <td class="p-2.5">The Sliding Mr. Bones</td>
-      <td class="p-2.5">Malcolm Lockyer</td>
-      <td class="p-2.5">1961</td>
-      <td class="p-2.5">1961</td>
-      <td class="p-2.5">1961</td>
-      <td class="p-2.5">1961</td>
-    </tr>
-    <tr class="mb-2">
-      <td class="p-2.5">The Sliding Mr. Bones</td>
-      <td class="p-2.5">Malcolm Lockyer</td>
-      <td class="p-2.5">1961</td>
-      <td class="p-2.5">1961</td>
-      <td class="p-2.5">1961</td>
-      <td class="p-2.5">1961</td>
-    </tr>
-    <tr class="mb-2">
-      <td class="p-2.5">The Sliding Mr. Bones</td>
-      <td class="p-2.5">Malcolm Lockyer</td>
-      <td class="p-2.5">1961</td>
-      <td class="p-2.5">1961</td>
-      <td class="p-2.5">1961</td>
-      <td class="p-2.5">1961</td>
+      <tr *ngFor="let etudiant of etudiants" class="mb-2">
+      <td class="p-2.5">{{ etudiant.matricule }}</td>
+      <td class="p-2.5">{{ etudiant.nom }}</td>
+      <td class="p-2.5">{{ etudiant.prenom }}</td>
+      <td class="p-2.5">{{ etudiant.classe?.niveau }}-{{ etudiant.classe?.filiere }}</td>
+      <td class="p-2.5">{{ etudiant.classe?.filiere }}</td>
+        @if (etudiant.status) {
+          <td class="p-2.5">À jour</td>
+        } @else {
+          <td class="p-2.5">Pas à jour</td>
+        }
     </tr>
   </tbody>
 </table>

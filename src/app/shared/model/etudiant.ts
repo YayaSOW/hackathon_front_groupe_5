@@ -1,14 +1,9 @@
 import { Classe } from './classe';
 import { Presence } from './presence';
+import {User} from './user';
 
 
-export interface Etudiant {
-    id?: number;
-    nom?: string;
-    prenom?: string;
-    login?: string;
-    telephone?: string;
-    password?: string;
+export interface Etudiant extends User {
     matricule?: string;
     classe?: Classe;
     status?: boolean;
