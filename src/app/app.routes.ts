@@ -8,72 +8,30 @@ import { AbsenceItemComponent } from './pages/admin/absences/absence-item/absenc
 import { SecurityComponent } from './pages/security/security.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
-// import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 
-
-// export const routes: Routes = [
-//     {
-//         path: 'login',
-//         component: SecurityComponent
-//       },
-//     {
-//         path: 'etudiant',
-//         component: EtudiantListPageComponent,
-//         // canActivate: [AuthGuard]
-//     },
-//     {
-//         path: 'absence',
-//         component: AbsenceListPageComponent,
-//         // canActivate: [AuthGuard]
-//     },
-//     {
-//         path: 'item',
-//         component: AbsenceItemComponent,
-//         // canActivate: [AuthGuard]
-//     },
-//     {
-//         path: 'retard',
-//         component: RetardListPageComponent,
-//         // canActivate: [AuthGuard]
-//     },
-//     {
-//         path: '',
-//         redirectTo: '/login',
-//         pathMatch: 'full'
-//       }
-// ];
-// @NgModule({
-//     imports: [RouterModule.forRoot(routes)],
-//     exports: [RouterModule]
-//   })
-//   export class AppRoutingModule {}
 export const routes: Routes = [
-    {
-      path: '',
-      component: AdminLayoutComponent,
-      children: [
-        { path: 'etudiant', component: EtudiantListPageComponent },
-        { path: 'absence', component: AbsenceListPageComponent },
-        { path: 'item', component: AbsenceItemComponent },
-        { path: 'retard', component: RetardListPageComponent },
-      ]
-    },
-    {
-      path: '',
-      component: AuthLayoutComponent,
-      children: [
-        { path: 'login', component: SecurityComponent }
-      ]
-    },
-    {
-      path: '**',
-      redirectTo: '/login'
-    }
-  ];
-  
-  @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
-  })
-  export class AppRoutingModule {}
+  {
+    path: '',
+    component: AdminLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'etudiant', component: EtudiantListPageComponent },
+      { path: 'absence', component: AbsenceListPageComponent },
+      { path: 'item', component: AbsenceItemComponent },
+      { path: 'retard', component: RetardListPageComponent },
+    ]
+  },
+  {
+    path: '',
+    component: AuthLayoutComponent,
+    children: [
+      { path: 'login', component: SecurityComponent }
+    ]
+  },
+  {
+    path: '**',
+    redirectTo: '/login'
+  }
+];
