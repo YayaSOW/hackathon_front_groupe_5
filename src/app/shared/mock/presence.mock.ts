@@ -21,7 +21,16 @@ export const MOCK_PRESENCE: Presence[] = [
     etudiant: MOCK_ETUDIANT[1],
     cours: MOCK_COURS[1],
     admin: MOCK_ADMIN[0],
-    justificatifs: []  }
+    justificatifs: []  },
+  {
+    id: 3,
+    date: '2025-05-30',
+    typePresence: 'ABSENT',
+    etudiant: MOCK_ETUDIANT[1],
+    cours: MOCK_COURS[1],
+    admin: MOCK_ADMIN[0],
+    justificatifs: [MOCK_JUSTIFICATIF[0]]
+  },
 ];
 
 // Liaison des absences aux entités
