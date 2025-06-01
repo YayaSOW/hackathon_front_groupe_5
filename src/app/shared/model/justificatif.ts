@@ -8,3 +8,12 @@ export interface Justificatif {
     presence?: Presence;
 }
 
+export interface JustificatifOneWebResponse {
+  motif: string;
+  validation: boolean;
+  presenceId: string;
+  nomEtudiant: string;
+  prenomEtudiant: string;
+  matricule: string;
+  classe: string;
+}

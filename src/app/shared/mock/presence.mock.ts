@@ -24,7 +24,7 @@ export const MOCK_PRESENCE: Presence[] = [
     justificatifs: []  }
 ];
 
-// Liason des absences aux entités
+// Liaison des absences aux entités
 MOCK_ETUDIANT[0].absences = [MOCK_PRESENCE[0]];
 MOCK_ETUDIANT[1].absences = [MOCK_PRESENCE[1]];
 MOCK_COURS[0].absences = [MOCK_PRESENCE[0]];

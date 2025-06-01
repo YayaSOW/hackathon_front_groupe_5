@@ -11,7 +11,19 @@ export const MOCK_CLASSE: Classe[] = [
   {
     id: 2,
     filiere: 'IAGE',
-    niveau: 'L2',
+    niveau: 'L3',
+    etudiants: []
+  },
+  {
+    id: 3,
+    filiere: 'MOSIEF',
+    niveau: 'L3',
+    etudiants: []
+  },
+  {
+    id: 4,
+    filiere: 'MAIE',
+    niveau: 'L3',
     etudiants: []
   }
 ];
