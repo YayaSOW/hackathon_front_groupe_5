@@ -1,0 +1,26 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+  <!-- Filtre par Etat -->
+  <div>
+    <label class="block text-sm font-semibold mb-1">État</label>
+    <select class="px-3 py-1 rounded border border-gray-300 bg-white">
+      <option value="">Justifié</option>
+      <option value="">Non Justifié</option>
+    </select>
+  </div>
+
+  <!-- Filtre par Date -->
+  <div>
+    <label class="block text-sm font-semibold mb-1">Date</label>
+    <div class="flex gap-2 flex-wrap">
+      <input class="px-3 py-1 rounded border border-gray-300 bg-white" type="date" name="" id="">
+    </div>
+  </div>
+
+  <!-- Filtre par Cours -->
+  <div>
+    <label class="block text-sm font-semibold mb-1">Cours</label>
+    <select class="px-3 py-1 rounded border border-gray-300 bg-white">
+      <option *ngFor="let cour of cours" [value]="cour.id">{{ cour.nomCours }}</option>
+    </select>
+  </div>
+</div>

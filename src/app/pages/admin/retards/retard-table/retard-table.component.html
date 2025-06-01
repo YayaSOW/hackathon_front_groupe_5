@@ -1,0 +1,22 @@
+<table class="w-full">
+  <thead>
+  <tr>
+    <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Date</th>
+    <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Type</th>
+    <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Matricule</th>
+    <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Nom</th>
+    <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Prenom</th>
+    <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Cours</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let presence of presences" class="mb-2">
+      <td class="p-2.5">{{ presence.date }}</td>
+      <td class="p-2.5">{{ presence.typePresence }}</td>
+      <td class="p-2.5">{{ presence.etudiant?.matricule }}</td>
+      <td class="p-2.5">{{ presence.etudiant?.nom }}</td>
+      <td class="p-2.5">{{ presence.etudiant?.prenom }}</td>
+      <td class="p-2.5">{{ presence.cours?.nomCours }}</td>
+    </tr>
+   </tbody>
+</table>
