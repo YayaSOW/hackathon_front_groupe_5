@@ -20,7 +20,7 @@
   <div>
     <label class="block text-sm font-semibold mb-1">Cours</label>
     <select class="px-3 py-1 rounded border border-gray-300 bg-white">
-      <option>Angular</option>
+      <option *ngFor="let cour of cours" [value]="cour.id">{{ cour.nomCours }}</option>
     </select>
   </div>
 </div>

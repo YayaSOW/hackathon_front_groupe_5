@@ -2,11 +2,8 @@
   <!-- Filtre par Classe -->
   <div>
     <label class="block text-sm font-semibold mb-1">Classe</label>
-    <select class="px-3 py-1 rounded border border-gray-300 bg-white">
-      <option value="">L3-GLRS</option>
-      <option value="">L3-IAGE</option>
-      <option value="">L3-MAIE</option>
-      <option value="">L3-MOSIEF</option>
+    <select id="status" class="px-3 py-1 rounded border border-gray-300 bg-white">
+      <option *ngFor="let classe of classes" value="">{{ classe.niveau }}-{{ classe.filiere }}</option>
     </select>
   </div>
 

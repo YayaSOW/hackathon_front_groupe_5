@@ -1,12 +1,7 @@
 import { Presence } from './presence';
+import {User} from './user';
 
-export interface Admin {
-    id?: number;
-    nom?: string;
-    prenom?: string;
-    login?: string;
-    telephone?: string;
-    password?: string;
+export interface Admin extends User {
     absences?: Array<Presence>;
 }
 

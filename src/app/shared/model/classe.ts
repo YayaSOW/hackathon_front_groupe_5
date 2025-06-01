@@ -7,3 +7,8 @@ export interface Classe {
     etudiants?: Array<Etudiant>;
 }
 
+export interface ClasseSampleDto {
+  id: number;
+  filiere: string;
+  niveau: string;
+}

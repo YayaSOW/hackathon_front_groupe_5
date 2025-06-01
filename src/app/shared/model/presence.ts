@@ -23,3 +23,11 @@ export namespace Presence {
 }
 
 
+// export interface PresenceAllWebResponse {
+//   date: string;
+//   typePresence: Presence.TypePresenceEnum;
+//   matricule: string;
+//   nom: string;
+//   prenom: string;
+//   nomCours: string;
+// }

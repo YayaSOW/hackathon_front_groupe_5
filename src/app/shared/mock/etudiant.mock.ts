@@ -26,8 +26,21 @@ export const MOCK_ETUDIANT: Etudiant[] = [
     classe: MOCK_CLASSE[1],
     status: false,
     absences: []
+  },
+  {
+    id: 3,
+    nom: 'Sarr',
+    prenom: 'Dieyna',
+    login: 'dieyna-sarr@gmail.com',
+    telephone: '770000009',
+    password: 'passer123',
+    matricule: 'INF2025-003',
+    classe: MOCK_CLASSE[1],
+    status: false,
+    absences: []
   }
 ];
 
 MOCK_CLASSE[0].etudiants = [MOCK_ETUDIANT[0]];
 MOCK_CLASSE[1].etudiants = [MOCK_ETUDIANT[1]];
+MOCK_CLASSE[1].etudiants = [MOCK_ETUDIANT[2]];
