@@ -1,4 +1,4 @@
-import {Vigile} from '../model/vigile';
+import {Vigile} from '../../model/vigile';
 
 export const MOCK_VIGILE: Vigile[] = [
   {

@@ -1,4 +1,4 @@
-import {Classe} from '../model/classe';
+import {Classe} from '../../model/classe';
 
 
 export const MOCK_CLASSE: Classe[] = [

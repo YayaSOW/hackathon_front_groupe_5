@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Etudiant} from '../../../../shared/model/etudiant';
-import {EtudiantService} from '../../../../shared/services/impl/etudiant.service';
+import {EtudiantService} from '../../../../shared/mock/services/etudiant.service';
 
 @Component({
   selector: 'app-etudiant-table',

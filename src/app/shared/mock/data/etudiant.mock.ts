@@ -1,4 +1,4 @@
-import {Etudiant} from '../model/etudiant';
+import {Etudiant} from '../../model/etudiant';
 import {MOCK_CLASSE} from './classe.mock';
 
 

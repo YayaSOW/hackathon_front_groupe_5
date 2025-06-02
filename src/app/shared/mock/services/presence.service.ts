@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import {Presence } from '../../model/presence';
-import {MOCK_PRESENCE} from '../../mock/presence.mock';
+import {MOCK_PRESENCE} from '../data/presence.mock';
 
 @Injectable({
   providedIn: 'root'

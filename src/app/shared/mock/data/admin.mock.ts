@@ -1,4 +1,4 @@
-import {Admin} from '../model/admin';
+import {Admin} from '../../model/admin';
 
 
 export const MOCK_ADMIN: Admin[] = [

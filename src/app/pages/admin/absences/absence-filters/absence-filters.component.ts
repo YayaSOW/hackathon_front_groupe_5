@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {CoursService} from '../../../../shared/services/impl/cours.service';
+import {CoursService} from '../../../../shared/mock/services/cours.service';
 import {Cours} from '../../../../shared/model/cours';
 import {NgForOf} from '@angular/common';
 

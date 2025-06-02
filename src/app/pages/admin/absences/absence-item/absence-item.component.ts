@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {PresenceService} from '../../../../shared/services/impl/presence.service';
+import {PresenceService} from '../../../../shared/mock/services/presence.service';
 import {Presence} from '../../../../shared/model/presence';
 
 @Component({

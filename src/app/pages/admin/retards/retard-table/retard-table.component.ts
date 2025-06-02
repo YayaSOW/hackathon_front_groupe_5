@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Presence} from '../../../../shared/model/presence';
-import {PresenceService} from '../../../../shared/services/impl/presence.service';
+import {PresenceService} from '../../../../shared/mock/services/presence.service';
 import {NgForOf} from '@angular/common';
 import {Router} from '@angular/router';
 

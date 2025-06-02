@@ -1,4 +1,4 @@
-import {Justificatif} from '../model/justificatif';
+import {Justificatif} from '../../model/justificatif';
 
 export const MOCK_JUSTIFICATIF: Justificatif[] = [
   {

@@ -1,4 +1,4 @@
-import { Presence } from "../model/presence";
+import { Presence } from "../../model/presence";
 import {MOCK_ETUDIANT} from './etudiant.mock';
 import {MOCK_COURS} from './cours.mock';
 import {MOCK_ADMIN} from './admin.mock';

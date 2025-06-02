@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import {MOCK_CLASSE} from '../../mock/classe.mock';
+import {MOCK_CLASSE} from '../data/classe.mock';
 import {Classe} from '../../model/classe';
 
 @Injectable({

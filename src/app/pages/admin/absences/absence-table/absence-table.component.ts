@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router } from '@angular/router';
 import {NgForOf} from '@angular/common';
 import {Presence } from '../../../../shared/model/presence';
-import {PresenceService} from '../../../../shared/services/impl/presence.service';
+import {PresenceService} from '../../../../shared/mock/services/presence.service';
 
 @Component({
   selector: 'app-absence-table',
