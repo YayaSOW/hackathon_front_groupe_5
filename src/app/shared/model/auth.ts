@@ -5,3 +5,8 @@ export interface LoginResponse {
   success: boolean;
   data: User | null;
 }
+
+export interface AuthRequest {
+  login: string;
+  password: string;
+}

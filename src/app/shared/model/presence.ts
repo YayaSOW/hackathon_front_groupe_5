@@ -5,29 +5,26 @@ import { Cours } from './cours';
 
 
 export interface Presence {
-    id?: number;
-    date?: string;
-    typePresence?: Presence.TypePresenceEnum;
-    justificatifs?: Array<Justificatif>;
-    etudiant?: Etudiant;
-    cours?: Cours;
+    id: string;
+    date: string;
+    typePresence: TypePresence;
+    justificatifs: Array<Justificatif>;
+    etudiant: Etudiant;
+    cours: Cours;
     admin?: Admin;
 }
-export namespace Presence {
-    export const TypePresenceEnum = {
-        Present: 'PRESENT',
-        Absent: 'ABSENT',
-        Retard: 'RETARD'
-    } as const;
-    export type TypePresenceEnum = typeof TypePresenceEnum[keyof typeof TypePresenceEnum];
+export enum TypePresence {
+  PRESENT = 'PRESENT',
+  ABSENT = 'ABSENT',
+  RETARD = 'RETARD'
 }
 
-
-// export interface PresenceAllWebResponse {
-//   date: string;
-//   typePresence: Presence.TypePresenceEnum;
-//   matricule: string;
-//   nom: string;
-//   prenom: string;
-//   nomCours: string;
-// }
+export interface PresenceResponseDto {
+    id: string,
+    date: string,
+    typePresence: Presence,
+    cours: string;
+    matricule: string,
+    nom: string,
+    prenom: string,
+}

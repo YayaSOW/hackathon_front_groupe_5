@@ -2,10 +2,17 @@ import { Presence } from './presence';
 
 
 export interface Cours {
-    id?: number;
-    date?: string;
-    nomCours?: string;
-    duree?: number;
-    absences?: Array<Presence>;
+    id: string;
+    date: string;
+    nomCours: string;
+    duree: number;
+    absences: Array<Presence>;
 }
 
+export interface CoursResponseDto {
+  id: string;
+  date: string;
+  nomCours: string;
+  heureDebut: string;
+  heureFin: string;
+}
