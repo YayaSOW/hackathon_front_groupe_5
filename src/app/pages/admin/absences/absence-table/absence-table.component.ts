@@ -28,7 +28,7 @@ export class AbsenceTableComponent implements OnInit {
       });
   }
 
-  onViewDetails(id?: number) {
+  onViewDetails(id?: string) {
     if (id !== undefined) {
       this.router.navigateByUrl(`absence/${id}`);
     } else {

@@ -11,7 +11,7 @@ export class PresenceService {
     return of(MOCK_PRESENCE);
   }
 
-  getPresencesById(id: number): Observable<Presence | undefined> {
+  getPresencesById(id: string): Observable<Presence | undefined> {
     const found = MOCK_PRESENCE.find(p => p.id === id);
     return of(found);
   }

@@ -16,7 +16,7 @@ export class AbsenceItemComponent implements OnInit {
 
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
-    const id = idParam ? +idParam : undefined;
+    const id = idParam ? idParam : undefined;
 
     if (id !== undefined) {
       this.presenceService.getPresencesById(id).subscribe((data) => {
