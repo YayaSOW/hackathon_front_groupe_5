@@ -15,7 +15,8 @@ export interface EtudiantResponseDto {
   nom: string;
   prenom: string;
   matricule: string;
+  filiere:  string;
   classe: string;
-  status: boolean;
+  status: string;
   role: Role;
 }

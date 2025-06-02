@@ -1,26 +1,41 @@
-<table class="w-full">
-  <thead>
-    <tr>
-      <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Matricule</th>
-      <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Nom</th>
-      <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Prenom</th>
-      <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Classe</th>
-      <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Filière</th>
-      <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Statut</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr *ngFor="let etudiant of etudiants" class="mb-2">
-      <td class="p-2.5">{{ etudiant.matricule }}</td>
-      <td class="p-2.5">{{ etudiant.nom }}</td>
-      <td class="p-2.5">{{ etudiant.prenom }}</td>
-      <td class="p-2.5">{{ etudiant.classe?.niveau }}-{{ etudiant.classe?.filiere }}</td>
-      <td class="p-2.5">{{ etudiant.classe?.filiere }}</td>
-        @if (etudiant.status) {
-          <td class="p-2.5">À jour</td>
-        } @else {
-          <td class="p-2.5">Pas à jour</td>
-        }
-    </tr>
-  </tbody>
-</table>
+<app-etudiant-filters
+  (filterClasse)="onFilterByClasse($event)"
+  (filterStatut)="onFilterByStatut($event)">>
+</app-etudiant-filters>
+
+<div *ngIf="!loading && etudiants.results.length > 0">
+  <table *ngIf="etudiants.results.length > 0" class="w-full">
+    <thead>
+      <tr>
+        <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Matricule</th>
+        <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Nom</th>
+        <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Prenom</th>
+        <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Classe</th>
+        <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Filière</th>
+        <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Statut</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let etudiant of etudiants.results" class="mb-2">
+        <td class="p-2.5">{{ etudiant.matricule }}</td>
+        <td class="p-2.5">{{ etudiant.nom }}</td>
+        <td class="p-2.5">{{ etudiant.prenom }}</td>
+        <td class="p-2.5">{{ etudiant.classe }}</td>
+        <td class="p-2.5">{{ etudiant.filiere }}</td>
+          @if (etudiant.status) {
+            <td class="p-2.5">À jour</td>
+          } @else {
+            <td class="p-2.5">Pas à jour</td>
+          }
+      </tr>
+    </tbody>
+  </table>
+  <app-pagination
+    [currentPage]="page"
+    [totalPages]="etudiants.totalPages ?? 0"
+    (pageChange)="onPageChange($event)">
+  </app-pagination>
+</div>
+<div *ngIf="!loading && etudiants.results.length === 0">
+  Aucun étudiant trouvé.
+</div>

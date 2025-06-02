@@ -6,3 +6,10 @@ export interface Classe {
     niveau: string;
     etudiants: Array<Etudiant>;
 }
+
+export interface ClasseResponseDto {
+  id: string;
+  filiere: string;
+  niveau: string;
+  nomClasse: string;
+}

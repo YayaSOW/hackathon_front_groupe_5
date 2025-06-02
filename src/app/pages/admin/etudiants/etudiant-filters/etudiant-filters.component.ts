@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ClasseService} from '../../../../shared/mock/services/classe.service';
-import {Classe} from '../../../../shared/model/classe';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ClasseResponseDto} from '../../../../shared/model/classe';
 import {NgForOf} from '@angular/common';
+import {ClasseService} from '../../../../shared/services/impl/classe.service';
 
 @Component({
   selector: 'app-etudiant-filters',
@@ -12,15 +12,33 @@ import {NgForOf} from '@angular/common';
   styleUrl: './etudiant-filters.component.css',
 })
 export class EtudiantFiltersComponent implements OnInit {
-  classes: Classe[] = [];
+  classes: ClasseResponseDto[] = [];
 
   constructor(private classeService: ClasseService) {
   }
 
   ngOnInit(): void {
-    this.classeService.getClasses().subscribe(data => {
-      console.log('data', data);
-      this.classes = data;
+    this.classeService.getAllClasses().subscribe({
+      next: (data) => {
+        this.classes = data.results;
+      },
+      error: (err) => {
+        console.error(err);
+      }
     });
     }
+
+  @Output() filterClasse = new EventEmitter<string>();
+  @Output() filterStatut = new EventEmitter<string>();
+
+  onClasseChange(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    const valeur = select.value;
+    this.filterClasse.emit(valeur);
+  }
+
+  onStatutChange(statut: string): void {
+    this.filterStatut.emit(statut);
+  }
+
 }

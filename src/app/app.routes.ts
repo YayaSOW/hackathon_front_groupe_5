@@ -9,6 +9,9 @@ import { SecurityComponent } from './pages/security/security.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { AuthGuard } from './shared/guards/auth.guard';
+import {
+  AbsenceItemJustificatifComponent
+} from './pages/admin/absences/absence-item-justificatif/absence-item-justificatif.component';
 
 
 export const routes: Routes = [
@@ -20,6 +23,7 @@ export const routes: Routes = [
       { path: 'etudiant', component: EtudiantListPageComponent },
       { path: 'absence', component: AbsenceListPageComponent },
       { path: 'absence/:id', component: AbsenceItemComponent },
+      { path: 'absence/:id/justificatif', component: AbsenceItemJustificatifComponent },
       { path: 'retard', component: RetardListPageComponent },
     ]
   },

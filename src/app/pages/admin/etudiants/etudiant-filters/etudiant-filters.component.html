@@ -2,8 +2,15 @@
   <!-- Filtre par Classe -->
   <div>
     <label class="block text-sm font-semibold mb-1">Classe</label>
-    <select id="status" class="px-3 py-1 rounded border border-gray-300 bg-white">
-      <option *ngFor="let classe of classes" value="">{{ classe.niveau }}-{{ classe.filiere }}</option>
+    <select
+      id="classe"
+      class="px-3 py-1 rounded border border-gray-300 bg-white"
+      (change)="onClasseChange($event)"
+    >
+      <option value="">-- Toutes les classes --</option>
+      <option *ngFor="let classe of classes" [value]="classe.id">
+        {{ classe.niveau }} - {{ classe.filiere }}
+      </option>
     </select>
   </div>
 
@@ -12,14 +19,16 @@
     <label class="block text-sm font-semibold mb-1">Statut</label>
     <div class="flex gap-2 flex-wrap">
       <button
-        data-statut="up-to-date"
-        class="filter-statut px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
+        type="button"
+        (click)="onStatutChange('true')"
+        class="px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
       >
         À jour
       </button>
       <button
-        data-statut="not-up-to-date"
-        class="filter-statut px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
+        type="button"
+        (click)="onStatutChange('false')"
+        class="px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
       >
         Pas à jour
       </button>

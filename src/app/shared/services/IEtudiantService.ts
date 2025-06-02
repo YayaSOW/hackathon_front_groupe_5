@@ -1,8 +1,9 @@
 import {Observable} from 'rxjs';
-import {Etudiant} from '../model/etudiant';
+import {Etudiant, EtudiantResponseDto} from '../model/etudiant';
+import {RestResponse} from '../model/restResponse';
 
 export interface IEtudiantService {
-  getAllEtudiants():Observable<Etudiant>;
-  getAllEtudiantsByClasse():Observable<Etudiant[]>;
-  getAllEtudiantsByStatut():Observable<Etudiant[]>;
+  getAllEtudiants(page: number, size: number):Observable<RestResponse<EtudiantResponseDto[]>>;
+  getAllEtudiantsByClasse(classeId: string, page: number, size: number):Observable<RestResponse<EtudiantResponseDto[]>>;
+  getAllEtudiantsByStatut(status: string, page: number, size: number):Observable<RestResponse<EtudiantResponseDto[]>>;
 }

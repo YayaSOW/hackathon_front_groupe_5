@@ -5,7 +5,7 @@ import {Presence} from '../../../../shared/model/presence';
 
 @Component({
   selector: 'app-absence-item',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './absence-item.component.html',
   styleUrl: './absence-item.component.css'
 })
@@ -25,7 +25,15 @@ export class AbsenceItemComponent implements OnInit {
     }
   }
 
-   onRedirection(){
-    this.router.navigate(['absence']) }
+  onViewJustificatif(id?: string) {
+    if (id !== undefined) {
+      this.router.navigateByUrl(`absence/${id}/justificatif`);
+    } else {
+      console.error("ID d'absence non défini");
+    }
+  }
+
+ onRedirection(){
+  this.router.navigate(['absence']) }
 
 }
