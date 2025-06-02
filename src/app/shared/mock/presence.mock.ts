@@ -6,7 +6,7 @@ import {MOCK_JUSTIFICATIF} from './justificatif.mock';
 
 export const MOCK_PRESENCE: Presence[] = [
   {
-    id: 1,
+    id: "1",
     date: '2025-05-30',
     typePresence: 'ABSENT',
     etudiant: MOCK_ETUDIANT[0],
@@ -15,7 +15,7 @@ export const MOCK_PRESENCE: Presence[] = [
     justificatifs: [MOCK_JUSTIFICATIF[0]]
   },
   {
-    id: 2,
+    id: "2",
     date: '2025-05-31',
     typePresence: 'RETARD',
     etudiant: MOCK_ETUDIANT[1],
@@ -23,7 +23,7 @@ export const MOCK_PRESENCE: Presence[] = [
     admin: MOCK_ADMIN[0],
     justificatifs: []  },
   {
-    id: 3,
+    id: "3",
     date: '2025-05-30',
     typePresence: 'ABSENT',
     etudiant: MOCK_ETUDIANT[1],

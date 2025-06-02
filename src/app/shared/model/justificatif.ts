@@ -5,7 +5,7 @@ export interface Justificatif {
     id: string;
     motif: string;
     validation: boolean;
-    presence: Presence;
+    presence: Presence | undefined; // undefined pour pouvoir autoriser le mock justificatif.
 }
 
 export interface JustificatifResponseDto {

@@ -4,7 +4,7 @@ import {MOCK_CLASSE} from './classe.mock';
 
 export const MOCK_ETUDIANT: Etudiant[] = [
   {
-    id: 1,
+    id: "1",
     nom: 'Ndoye',
     prenom: 'Fatou',
     login: 'fatou-ndoye@gmail.com',
@@ -13,10 +13,11 @@ export const MOCK_ETUDIANT: Etudiant[] = [
     matricule: 'INF2025-001',
     classe: MOCK_CLASSE[0],
     status: true,
-    absences: []
+    absences: [],
+    role: "ETUDIANT"
   },
   {
-    id: 2,
+    id: "2",
     nom: 'Sagna',
     prenom: 'Mamadou',
     login: 'mamadou-sagna@gmail.com',
@@ -25,10 +26,11 @@ export const MOCK_ETUDIANT: Etudiant[] = [
     matricule: 'INF2025-002',
     classe: MOCK_CLASSE[1],
     status: false,
-    absences: []
+    absences: [],
+    role: "ETUDIANT"
   },
   {
-    id: 3,
+    id: "3",
     nom: 'Sarr',
     prenom: 'Dieyna',
     login: 'dieyna-sarr@gmail.com',
@@ -37,7 +39,8 @@ export const MOCK_ETUDIANT: Etudiant[] = [
     matricule: 'INF2025-003',
     classe: MOCK_CLASSE[1],
     status: false,
-    absences: []
+    absences: [],
+    role: "ETUDIANT"
   }
 ];
 

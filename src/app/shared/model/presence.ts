@@ -13,16 +13,19 @@ export interface Presence {
     cours: Cours;
     admin?: Admin;
 }
-export enum TypePresence {
-  PRESENT = 'PRESENT',
-  ABSENT = 'ABSENT',
-  RETARD = 'RETARD'
+
+export type TypePresence = 'PRESENT' | 'ABSENT' | 'RETARD';
+
+export enum TypePresenceEnum {
+  PRESENT = 'Present',
+  ABSENT = 'Absent',
+  RETARD = 'Retard'
 }
 
 export interface PresenceResponseDto {
     id: string,
     date: string,
-    typePresence: Presence,
+    typePresence: string,
     cours: string;
     matricule: string,
     nom: string,
