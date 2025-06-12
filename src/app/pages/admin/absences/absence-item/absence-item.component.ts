@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {PresenceService} from '../../../../shared/mock/services/presence.service';
-import {Presence} from '../../../../shared/model/presence';
+import {Presence, PresenceResponseDto} from '../../../../shared/model/presence';
+import {PresenceService} from '../../../../shared/services/impl/presence.service';
+import {RestResponse} from '../../../../shared/model/restResponse';
 
 @Component({
   selector: 'app-absence-item',
@@ -10,7 +11,21 @@ import {Presence} from '../../../../shared/model/presence';
   styleUrl: './absence-item.component.css'
 })
 export class AbsenceItemComponent implements OnInit {
-  presence?: Presence;
+
+  presence?: RestResponse<PresenceResponseDto> = {
+    status: 200,
+    results: {
+      id: '',
+      date: '',
+      typePresence: '',
+      nomCours: '',
+      matricule: '',
+      nom: '',
+      prenom: ''
+    },
+    type: 'success',
+    totalItems: 0,
+  };
 
   constructor(private router: Router, private route: ActivatedRoute, private presenceService: PresenceService){}
 
@@ -19,8 +34,9 @@ export class AbsenceItemComponent implements OnInit {
     const id = idParam ? idParam : undefined;
 
     if (id !== undefined) {
-      this.presenceService.getPresencesById(id).subscribe((data) => {
+      this.presenceService.getPresenceById(id).subscribe((data) => {
         this.presence = data;
+        console.log(this.presence)
       });
     }
   }

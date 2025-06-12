@@ -1,5 +1,10 @@
-<table class="w-full">
-  <thead>
+<app-absence-filters
+  (filtersChange)="onFiltersChange($event)">
+></app-absence-filters>
+
+<div *ngIf="!loading && absences.results.length > 0">
+  <table *ngIf="absences.results.length > 0" class="w-full">
+    <thead>
     <tr>
       <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Date</th>
       <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Type</th>
@@ -9,19 +14,29 @@
       <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Cours</th>
       <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Action</th>
     </tr>
-  </thead>
-  <tbody>
-     <tr *ngFor="let absence of presences" class="mb-2">
+    </thead>
+    <tbody>
+    <tr *ngFor="let absence of absences.results" class="mb-2">
       <td class="p-2.5">{{ absence.date }}</td>
-       <td class="p-2.5">{{ absence.typePresence }}</td>
-      <td class="p-2.5">{{ absence.etudiant?.matricule }}</td>
-       <td class="p-2.5">{{ absence.etudiant?.nom }}</td>
-      <td class="p-2.5">{{ absence.etudiant?.prenom }}</td>
-      <td class="p-2.5">{{ absence.cours?.nomCours }}</td>
+      <td class="p-2.5">{{ absence.typePresence }}</td>
+      <td class="p-2.5">{{ absence.matricule }}</td>
+      <td class="p-2.5">{{ absence.nom }}</td>
+      <td class="p-2.5">{{ absence.prenom }}</td>
+      <td class="p-2.5">{{ absence.nomCours }}</td>
       <td class="p-2.5">
         <button (click)="onViewDetails(absence.id)"
-                class="bg-[#351D15] text-white rounded-sm text-sm p-2">Voir Détails</button>
+                class="bg-[#351D15] text-white rounded-sm text-sm p-2 cursor-pointer">Voir Détails
+        </button>
       </td>
     </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+  <app-pagination
+    [currentPage]="page"
+    [totalPages]="absences.totalPages ?? 0"
+    (pageChange)="onPageChange($event)">
+  </app-pagination>
+</div>
+<div *ngIf="!loading && absences.results.length === 0">
+  Aucune absence trouvée.
+</div>

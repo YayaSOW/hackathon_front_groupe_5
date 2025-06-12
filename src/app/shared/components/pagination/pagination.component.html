@@ -1,15 +1,13 @@
-<div class="flex justify-center mt-6" *ngIf="totalPages > 1">
-  <nav class="flex items-center space-x-1 text-sm" aria-label="Pagination">
+<div class="flex justify-end w-auto pt-3 border-t border-gray-200" *ngIf="totalPages > 1">
+  <nav class="flex items-center space-x-4 text-sm" aria-label="Pagination">
 
     <!-- Précédent -->
     <button
       (click)="goToPage(currentPage - 1)"
       [disabled]="currentPage === 0"
-      class="flex items-center justify-center h-9 w-9 rounded-md border bg-white text-gray-700 hover:bg-gray-100 disabled:opacity-50 transition"
+      class="flex items-center justify-center px-4 py-2 rounded-md border bg-white text-gray-700 hover:bg-gray-100 disabled:opacity-50 transition"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
+      Précédent
     </button>
 
     <!-- Pages dynamiques -->
@@ -31,11 +29,9 @@
     <button
       (click)="goToPage(currentPage + 1)"
       [disabled]="currentPage >= totalPages - 1"
-      class="flex items-center justify-center h-9 w-9 rounded-md border bg-white text-gray-700 hover:bg-gray-100 disabled:opacity-50 transition"
+      class="flex items-center justify-center px-4 py-2 rounded-md border bg-white text-gray-700 hover:bg-gray-100 disabled:opacity-50 transition"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
+      Suivant
     </button>
 
   </nav>

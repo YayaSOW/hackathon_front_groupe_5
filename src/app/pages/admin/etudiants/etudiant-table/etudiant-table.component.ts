@@ -29,92 +29,60 @@ export class EtudiantTableComponent implements OnInit {
   size = 5;
   loading = true;
 
+  // Filtres actifs
   currentClasse: string = '';
-  currentStatut?: string;
+  currentStatut: string = 'tous';
 
   constructor(private etudiantService: EtudiantService) {}
 
   ngOnInit(): void {
-    this.chargerEtudiants();
+    this.fetchEtudiants(); // Appliquer filtres par défaut au chargement
   }
 
-  chargerEtudiants() {
-    this.loading = true;
-
-    if (this.currentClasse) {
-      this.etudiantService.getAllEtudiantsByClasse(this.currentClasse, this.page, this.size).subscribe({
-        next: (data) => {
-          this.etudiants = data;
-          this.loading = false;
-        },
-        error: (err) => {
-          console.error(err);
-          this.loading = false;
-        }
-      });
-    } else if (this.currentStatut !== undefined) {
-      this.etudiantService.getAllEtudiantsByStatut(this.currentStatut, this.page, this.size).subscribe({
-        next: (data) => {
-          this.etudiants = data;
-          this.loading = false;
-        },
-        error: (err) => {
-          console.error(err);
-          this.loading = false;
-        }
-      });
-    } else {
-      this.etudiantService.getAllEtudiants(this.page, this.size).subscribe({
-        next: (data) => {
-          this.etudiants = data;
-          this.loading = false;
-        },
-        error: (err) => {
-          console.error(err);
-          this.loading = false;
-        }
-      });
-    }
-  }
-
-  onFilterByClasse(classe: string) {
-    this.currentClasse = classe;
-    this.currentStatut = undefined;
-    this.page = 0;
-    this.chargerEtudiants();
-  }
-
-  onFilterByStatut(statut: string) {
-    this.currentStatut = statut;
-    this.currentClasse = '';
-    this.page = 0;
-    this.chargerEtudiants();
-  }
-
-  precedent() {
-    if (!this.etudiants.first) {
-      this.page--;
-      this.chargerEtudiants();
-    }
-  }
-
-  suivant() {
-    if (!this.etudiants.last) {
-      this.page++;
-      this.chargerEtudiants();
-    }
+  onFiltersChange(filters: { classe: string; statut: string }) {
+    this.currentClasse = filters.classe;
+    this.currentStatut = filters.statut;
+    this.page = 0; // Reset pagination si filtre change
+    this.fetchEtudiants();
   }
 
   onPageChange(page: number) {
     this.page = page;
-
-    if (this.currentClasse) {
-      this.onFilterByClasse(this.currentClasse);
-    } else if (this.currentStatut !== undefined) {
-      this.onFilterByStatut(this.currentStatut);
-    } else {
-      this.chargerEtudiants(); // sans filtre
-    }
+    this.fetchEtudiants();
   }
+
+  private fetchEtudiants() {
+      this.loading = true;
+
+      const { currentClasse: classe, currentStatut: statut } = this;
+      const isClasseActive = classe !== '';
+      const isStatutActive = statut !== 'tous';
+      const page = this.page;
+      const size = this.size;
+
+    let observable$;
+
+      if (isClasseActive && isStatutActive) {
+        observable$ = this.etudiantService.getAllEtudiantsByClasseAndStatut(classe, statut, page, size);
+      } else if (isClasseActive) {
+        observable$ = this.etudiantService.getAllEtudiantsByClasse(classe, page, size);
+      } else if (isStatutActive) {
+        observable$ = this.etudiantService.getAllEtudiantsByStatut(statut, page, size);
+      } else {
+        observable$ = this.etudiantService.getAllEtudiants(page, size);
+      }
+
+      observable$.subscribe({
+        next: (data) => {
+          this.etudiants = data;
+          console.log(this.etudiants);
+          this.loading = false;
+        },
+        error: (err) => {
+          console.error(err);
+          this.loading = false;
+        }
+      });
+    }
 
 }

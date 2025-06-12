@@ -5,7 +5,7 @@ import {PaginationComponent} from '../../../../shared/components/pagination/pagi
 
 @Component({
   selector: 'app-etudiant-list-page',
-  imports: [EtudiantTableComponent, PaginationComponent],
+  imports: [EtudiantTableComponent],
   templateUrl: './etudiant-list-page.component.html',
   styleUrl: './etudiant-list-page.component.css',
 })

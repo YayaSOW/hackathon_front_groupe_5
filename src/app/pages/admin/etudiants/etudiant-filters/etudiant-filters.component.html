@@ -5,11 +5,12 @@
     <select
       id="classe"
       class="px-3 py-1 rounded border border-gray-300 bg-white"
-      (change)="onClasseChange($event)"
+      [(ngModel)] = "selectedClasse"
+      (ngModelChange)="emitFilters()"
     >
-      <option value="">-- Toutes les classes --</option>
+      <option value="">— Toutes —</option>
       <option *ngFor="let classe of classes" [value]="classe.id">
-        {{ classe.niveau }} - {{ classe.filiere }}
+        {{ classe.nomClasse }}
       </option>
     </select>
   </div>
@@ -18,6 +19,13 @@
   <div>
     <label class="block text-sm font-semibold mb-1">Statut</label>
     <div class="flex gap-2 flex-wrap">
+      <button
+        type="button"
+        (click)="onStatutChange('tous')"
+        class="px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
+      >
+        Tous
+      </button>
       <button
         type="button"
         (click)="onStatutChange('true')"

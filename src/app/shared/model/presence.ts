@@ -26,7 +26,7 @@ export interface PresenceResponseDto {
     id: string,
     date: string,
     typePresence: string,
-    cours: string;
+    nomCours: string;
     matricule: string,
     nom: string,
     prenom: string,

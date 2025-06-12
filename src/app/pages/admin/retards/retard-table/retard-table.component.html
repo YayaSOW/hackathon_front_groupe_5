@@ -1,4 +1,9 @@
-<table class="w-full">
+<app-retard-filters
+  (filtersChange)="onFiltersChange($event)">
+</app-retard-filters>
+
+<div *ngIf="!loading && retards.results.length > 0">
+  <table *ngIf="retards.results.length > 0" class="w-full">
   <thead>
   <tr>
     <th class="p-2.5 bg-[#EFF2F7] text-black opacity-70 text-left">Date</th>
@@ -10,13 +15,22 @@
   </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let presence of presences" class="mb-2">
-      <td class="p-2.5">{{ presence.date }}</td>
-      <td class="p-2.5">{{ presence.typePresence }}</td>
-      <td class="p-2.5">{{ presence.etudiant?.matricule }}</td>
-      <td class="p-2.5">{{ presence.etudiant?.nom }}</td>
-      <td class="p-2.5">{{ presence.etudiant?.prenom }}</td>
-      <td class="p-2.5">{{ presence.cours?.nomCours }}</td>
+    <tr *ngFor="let retard of retards.results" class="mb-2">
+      <td class="p-2.5">{{ retard.date }}</td>
+      <td class="p-2.5">{{ retard.typePresence }}</td>
+      <td class="p-2.5">{{ retard.matricule }}</td>
+      <td class="p-2.5">{{ retard.nom }}</td>
+      <td class="p-2.5">{{ retard.prenom }}</td>
+      <td class="p-2.5">{{ retard.nomCours }}</td>
     </tr>
    </tbody>
 </table>
+  <app-pagination
+    [currentPage]="page"
+    [totalPages]="retards.totalPages ?? 0"
+    (pageChange)="onPageChange($event)">
+  </app-pagination>
+</div>
+<div *ngIf="!loading && retards.results.length === 0">
+  Aucun retard trouvé.
+</div>

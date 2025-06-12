@@ -1,6 +1,5 @@
 <app-etudiant-filters
-  (filterClasse)="onFilterByClasse($event)"
-  (filterStatut)="onFilterByStatut($event)">>
+  (filtersChange)="onFiltersChange($event)">
 </app-etudiant-filters>
 
 <div *ngIf="!loading && etudiants.results.length > 0">

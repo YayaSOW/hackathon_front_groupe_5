@@ -8,13 +8,10 @@ import {AbsenceTableComponent} from '../absence-table/absence-table.component';
 @Component({
   selector: 'app-absence-list-page',
     imports: [
-        AbsenceFiltersComponent,
-        AbsenceTableComponent,
-        PaginationComponent
+        AbsenceTableComponent
     ],
   templateUrl: './absence-list-page.component.html',
   styleUrl: './absence-list-page.component.css'
 })
 export class AbsenceListPageComponent {
-
 }

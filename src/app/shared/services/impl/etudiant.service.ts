@@ -1,6 +1,6 @@
 import {IEtudiantService} from '../IEtudiantService';
 import {Etudiant, EtudiantResponseDto} from '../../model/etudiant';
-import {Observable} from 'rxjs';
+import {map, Observable} from 'rxjs';
 import {RestResponse} from '../../model/restResponse';
 import {GenericService} from './generic.service';
 import {Injectable} from '@angular/core';
@@ -28,4 +28,7 @@ export class EtudiantService extends GenericService<Etudiant> implements IEtudia
     return this.httpClient.get<RestResponse<EtudiantResponseDto[]>>(`${environment.apiUrl}/etudiants/status/${status}?page=${page}&size=${size}`);
   }
 
+  getAllEtudiantsByClasseAndStatut(classe: string, status: string, page: number, size: number): Observable<RestResponse<EtudiantResponseDto[]>> {
+     return this.httpClient.get<RestResponse<EtudiantResponseDto[]>>(`${environment.apiUrl}/etudiants/classe/${classe}/status/${status}?page=${page}&size=${size}`);
+  }
 }

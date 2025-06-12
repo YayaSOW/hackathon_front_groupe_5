@@ -2,17 +2,21 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ClasseResponseDto} from '../../../../shared/model/classe';
 import {NgForOf} from '@angular/common';
 import {ClasseService} from '../../../../shared/services/impl/classe.service';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-etudiant-filters',
   imports: [
-    NgForOf
+    NgForOf,
+    FormsModule
   ],
   templateUrl: './etudiant-filters.component.html',
   styleUrl: './etudiant-filters.component.css',
 })
 export class EtudiantFiltersComponent implements OnInit {
   classes: ClasseResponseDto[] = [];
+  selectedClasse: string = '';
+  selectedStatut: string = 'tous';
 
   constructor(private classeService: ClasseService) {
   }
@@ -28,17 +32,23 @@ export class EtudiantFiltersComponent implements OnInit {
     });
     }
 
-  @Output() filterClasse = new EventEmitter<string>();
-  @Output() filterStatut = new EventEmitter<string>();
+  @Output() filtersChange = new EventEmitter<{ classe: string; statut: string }>();
 
   onClasseChange(event: Event): void {
-    const select = event.target as HTMLSelectElement;
-    const valeur = select.value;
-    this.filterClasse.emit(valeur);
+    this.selectedClasse = (event.target as HTMLSelectElement).value;
+    this.emitFilters();
   }
 
   onStatutChange(statut: string): void {
-    this.filterStatut.emit(statut);
+    this.selectedStatut = statut;
+    this.emitFilters();
+  }
+
+  emitFilters(): void {
+    this.filtersChange.emit({
+      classe: this.selectedClasse,
+      statut: this.selectedStatut,
+    });
   }
 
 }
