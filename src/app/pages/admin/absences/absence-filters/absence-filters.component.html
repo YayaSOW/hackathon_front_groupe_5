@@ -32,6 +32,7 @@
       [(ngModel)] = "selectedCours"
       (ngModelChange)="emitFilters()"
       class="px-3 py-1 rounded border border-gray-300 bg-white">
+      <option value="">— Tous —</option>
       <option *ngFor="let cour of cours" [value]="cour.id">{{ cour.nomCours }}</option>
     </select>
   </div>

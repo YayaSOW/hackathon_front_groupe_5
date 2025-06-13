@@ -1,6 +1,6 @@
 import {IEtudiantService} from '../IEtudiantService';
 import {Etudiant, EtudiantResponseDto} from '../../model/etudiant';
-import {map, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {RestResponse} from '../../model/restResponse';
 import {GenericService} from './generic.service';
 import {Injectable} from '@angular/core';

@@ -25,5 +25,9 @@ export class JustificatifService extends GenericService<Justificatif> implements
     return this.httpClient.get<RestResponse<JustificatifResponseDto>>(`${environment.apiUrl}/justificatifs/${id}`);
   }
 
+  getJustificatifByPresenceId(id: string): Observable<RestResponse<JustificatifResponseDto>> {
+    return this.httpClient.get<RestResponse<JustificatifResponseDto>>(`${environment.apiUrl}/justificatifs/presence/${id}`);
+  }
+
 
 }

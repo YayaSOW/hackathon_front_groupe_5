@@ -5,4 +5,5 @@ import {JustificatifResponseDto} from '../model/justificatif';
 export interface IJustificatifService {
   getAllJustificatifs(page: number, size: number):Observable<RestResponse<JustificatifResponseDto[]>>;
   getJustificatifById(id: string):Observable<RestResponse<JustificatifResponseDto>>
+  getJustificatifByPresenceId(id: string):Observable<RestResponse<JustificatifResponseDto>>
 }

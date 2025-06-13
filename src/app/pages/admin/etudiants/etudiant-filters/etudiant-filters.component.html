@@ -8,7 +8,7 @@
       [(ngModel)] = "selectedClasse"
       (ngModelChange)="emitFilters()"
     >
-      <option value="">— Toutes —</option>
+      <option value="">— Tous —</option>
       <option *ngFor="let classe of classes" [value]="classe.id">
         {{ classe.nomClasse }}
       </option>

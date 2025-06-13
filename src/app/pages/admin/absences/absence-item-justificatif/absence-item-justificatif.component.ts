@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import {Location, NgForOf} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {JustificatifResponseDto} from '../../../../shared/model/justificatif';
@@ -7,7 +7,9 @@ import {JustificatifService} from '../../../../shared/services/impl/justificatif
 
 @Component({
   selector: 'app-absence-item-justificatif',
-  imports: [],
+  imports: [
+    NgForOf
+  ],
   templateUrl: './absence-item-justificatif.component.html',
   styleUrl: './absence-item-justificatif.component.css'
 })
@@ -22,8 +24,9 @@ export class AbsenceItemJustificatifComponent implements OnInit{
       nom: '',
       prenom: '',
       matricule: '',
+      classe: '',
       date: null,
-      justificatif: []
+      files: []
     },
     type: 'success',
     totalItems: 0,
@@ -36,9 +39,9 @@ export class AbsenceItemJustificatifComponent implements OnInit{
     const id = idParam ? idParam : undefined;
 
     if (id !== undefined) {
-      this.justificatifService.getJustificatifById(id).subscribe((data) => {
+      this.justificatifService.getJustificatifByPresenceId(id).subscribe((data) => {
         this.justificatif = data;
-        console.log(this.justificatif);
+        console.log(this.justificatif.results);
       });
     }
   }

@@ -15,6 +15,7 @@ export interface JustificatifResponseDto {
     nom: string,
     prenom: string,
     matricule: string,
+    classe: string,
     date: string | null,
-    justificatif: { url: string }[];
+    files: { url: string }[];
 }
