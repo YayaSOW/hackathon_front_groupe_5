@@ -12,6 +12,7 @@ export interface JustificatifResponseDto {
     id: string,
     motif: string;
     validation: boolean;
+    presenceId: string;
     nom: string,
     prenom: string,
     matricule: string,
