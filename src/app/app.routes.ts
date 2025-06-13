@@ -25,13 +25,15 @@ export const routes: Routes = [
       { path: 'absence/:id', component: AbsenceItemComponent },
       { path: 'absence/:id/justificatif', component: AbsenceItemJustificatifComponent },
       { path: 'retard', component: RetardListPageComponent },
+      { path: '', redirectTo: 'absence', pathMatch: 'full' },
     ]
   },
   {
     path: '',
     component: AuthLayoutComponent,
     children: [
-      { path: 'login', component: SecurityComponent }
+      { path: 'login', component: SecurityComponent },
+      { path: '', redirectTo: 'login', pathMatch: 'full' }
     ]
   },
   {

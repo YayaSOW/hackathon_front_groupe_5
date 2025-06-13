@@ -1,12 +1,15 @@
 import { User } from './user';
 
-export interface LoginResponse {
-  message: string;
-  success: boolean;
-  data: User | null;
-}
-
 export interface AuthRequest {
   login: string;
   password: string;
+}
+
+export interface LoginResponse {
+  type: string;
+  results: {
+    token: string;
+    user: User;
+  };
+  status: number;
 }

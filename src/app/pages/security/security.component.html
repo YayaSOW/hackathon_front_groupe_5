@@ -14,7 +14,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A4 4 0 0112 15a4 4 0 016.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
         <input
-          type="text"
+          type="email"
           placeholder="Entrer votre identifiant"
           class="bg-transparent focus:outline-none text-white placeholder-white w-full"
           [(ngModel)]="login"
@@ -23,7 +23,7 @@
           #loginInput="ngModel"
         >
       </div>
-      <span *ngIf="loginInput.invalid && loginInput.touched" class="text-red-500 text-xs">Veuillez entrer un identifiant.</span>
+      <span *ngIf="loginInput.invalid && loginInput.touched" class="text-red-500 text-xs">Veuillez entrer un email valide.</span>
     </div>
 
     <!-- Champ Mot de passe -->
@@ -83,7 +83,6 @@
     <button
       type="submit"
       class="w-full bg-[#cc7a00] hover:bg-[#a55f00] text-white font-bold py-2 rounded-full transition"
-      (click)="onButtonClick()"
       [disabled]="loginForm.invalid"
     >
       Connexion

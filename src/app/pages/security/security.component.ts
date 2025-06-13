@@ -12,7 +12,7 @@ import { LoginResponse } from '../../shared/model/auth';
   templateUrl: './security.component.html',
   styleUrls: ['./security.component.css']
 })
-export class SecurityComponent {
+export class SecurityComponent { 
   login: string = '';
   password: string = '';
   errorMessage: string = '';
@@ -25,27 +25,23 @@ export class SecurityComponent {
     this.authService.login(this.login, this.password).subscribe({
       next: (response: LoginResponse) => {
         console.log('Réponse AuthService:', response);
-        if (response.success) {
+        if (response.results?.user) {
           this.errorMessage = '';
-          console.log('Tentative de redirection vers /etudiant');
+          console.log('Tentative de redirection vers /absence');
           this.router.navigate(['/absence']).then(success => {
             console.log('Redirection réussie ?', success);
           }).catch(err => {
             console.error('Erreur de redirection:', err);
           });
         } else {
-          this.errorMessage = response.message;
+          this.errorMessage = 'Identifiants incorrects';
         }
       },
       error: (err) => {
         console.error('Erreur lors de la connexion:', err);
-        this.errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
+        this.errorMessage = err.message || 'Une erreur est survenue. Veuillez réessayer.';
       }
     });
-  }
-
-  onButtonClick() {
-    console.log('Bouton Connexion cliqué');
   }
 
   togglePasswordVisibility() {

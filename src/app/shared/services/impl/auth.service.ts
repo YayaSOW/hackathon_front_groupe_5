@@ -1,59 +1,94 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { IAuthService } from '../IAuthService';
-import { LoginResponse } from '../../model/auth';
+import { LoginResponse, AuthRequest } from '../../model/auth';
 import { User } from '../../model/user';
-import { MOCK_ADMIN } from '../../mock/data/admin.mock';
+// import { MOCK_ADMIN } from '../../mock/data/admin.mock';
+import { HttpClient } from '@angular/common/http';
+import { tap, catchError } from 'rxjs/operators';
+
+
+
 @Injectable({
     providedIn: 'root'
   })
   export class AuthService implements IAuthService {
-    private currentUser: User | null = null;
+    private apiUrl = 'https://gesabsences-32iz.onrender.com/api/v1';
+    private storageKey = 'authData';
+    private currentUserSubject = new BehaviorSubject<User | null>(null);
+    public currentUser$ = this.currentUserSubject.asObservable();
+    private token: string | null = null;
 
-    constructor() {
-      const savedUser = localStorage.getItem('currentUser');
-      if (savedUser) {
-        this.currentUser = JSON.parse(savedUser);
-        console.log('Utilisateur chargé depuis localStorage:', this.currentUser);
-      }
+    constructor(private http: HttpClient) {
+      this.loadFromStorage();
+      
     }
 
+    private loadFromStorage(): void {
+      try {
+        const savedData = localStorage.getItem(this.storageKey);
+        if (savedData) {
+          const { user, token } = JSON.parse(savedData);
+          if (user?.role === 'ADMIN') {
+            this.currentUserSubject.next(user);
+            this.token = token;
+            console.log('Utilisateur chargé depuis localStorage:', user);
+          } else {
+            this.clearStorage();
+          }
+        }
+      } catch (error) {
+        console.error('Erreur lors du chargement de localStorage:', error);
+        this.clearStorage();
+      }
+    }
+  
+    private clearStorage(): void {
+      localStorage.removeItem(this.storageKey);
+      this.currentUserSubject.next(null);
+      this.token = null;
+    }
+  
     login(login: string, password: string): Observable<LoginResponse> {
-      console.log('Tentative de connexion avec:', { login, password });
-      const user = MOCK_ADMIN.find(
-        (admin) => admin.login === login && admin.password === password
+      const credentials: AuthRequest = { login, password };
+      console.log('Tentative de connexion avec:', credentials);
+      return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, credentials).pipe(
+        tap((response: LoginResponse) => {
+          if (response.results?.user?.role === 'ADMIN') {
+            this.currentUserSubject.next(response.results.user);
+            this.token = response.results.token;
+            localStorage.setItem(this.storageKey, JSON.stringify({
+              user: response.results.user,
+              token: response.results.token
+            }));
+            console.log('Utilisateur connecté:', response.results.user);
+          } else {
+            throw new Error('Seuls les administrateurs peuvent se connecter.');
+          }
+        }),
+        catchError(error => {
+          console.error('Erreur de connexion:', error);
+          return throwError(() => new Error('Identifiants incorrects ou erreur serveur.'));
+        })
       );
-
-      if (user) {
-        this.currentUser = user;
-        console.log('Tentative de connexion avec:', );
-        console.log('Utilisateur connecté:', this.currentUser);
-        return of({
-          message: 'Connexion réussie',
-          success: true,
-          data: user
-        });
-      }
-
-      return of({
-        message: 'Identifiants incorrects',
-        success: false,
-        data: null
-      });
     }
-
+  
     isAuthenticated(): boolean {
-      const authenticated = !!this.currentUser;
+      const authenticated = !!this.currentUserSubject.value && !!this.token;
       console.log('isAuthenticated:', authenticated);
       return authenticated;
     }
-
+  
     getCurrentUser(): User | null {
-      return this.currentUser;
+      return this.currentUserSubject.value;
     }
-
+  
+    getToken(): string | null {
+      return this.token;
+    }
+  
     logout(): void {
-      this.currentUser = null;
-      localStorage.removeItem('currentUser');
+      console.log('Déconnexion');
+      this.clearStorage();
     }
   }
