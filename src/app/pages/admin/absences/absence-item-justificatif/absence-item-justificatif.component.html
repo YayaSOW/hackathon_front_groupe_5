@@ -1,55 +1,83 @@
 <div class="max-w-2xl mx-auto p-6 bg-white rounded shadow-md space-y-6">
-  <div class="flex items-center gap-4">
-    <button (click)="onRedirection()" class="text-xl cursor-pointer">⬅️</button>
-  <h2 class="text-2xl font-bold text-gray-800">Justificatif d'absence</h2>
-  </div>
-
-  <div class="space-y-4">
-    <div>
-      <label class="block text-sm font-medium text-gray-600">Nom de l'étudiant</label>
-      <input type="text" [value]="justificatif?.results?.nom" disabled
-             class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
+    <div class="flex items-center gap-4">
+        <button (click)="onRedirection()" class="text-xl cursor-pointer">⬅️</button>
+        <h2 class="text-2xl font-bold text-gray-800">Justificatif d'absence</h2>
     </div>
 
-    <div>
-      <label class="block text-sm font-medium text-gray-600">Classe</label>
-      <input type="text" [value]="justificatif?.results?.classe" disabled
-             class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
+    <div class="space-y-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-600">Nom de l'étudiant</label>
+            <input type="text" [value]="justificatif?.results?.nom" disabled
+                   class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-600">Classe</label>
+            <input type="text" [value]="justificatif?.results?.classe" disabled
+                   class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-600">Matricule</label>
+            <input type="text" [value]="justificatif?.results?.matricule" disabled
+                   class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-600">Motif</label>
+            <input type="text" [value]="justificatif?.results?.motif" disabled
+                   class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
+        </div>
     </div>
 
-    <div>
-      <label class="block text-sm font-medium text-gray-600">Matricule</label>
-      <input type="text" [value]="justificatif?.results?.matricule" disabled
-             class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
+    <!-- Toggle bouton -->
+    <div class="text-right">
+        <button (click)="toggleCarousel()"
+                class="px-4 py-2 bg-[#351D15] text-white rounded hover:bg-[#5e3510] transition">
+            {{ showCarousel ? 'Masquer les pièces jointes' : 'Afficher les pièces jointes' }}
+        </button>
     </div>
 
-    <div>
-      <label class="block text-sm font-medium text-gray-600">Motif</label>
-      <input type="text" [value]="justificatif?.results?.motif" disabled
-             class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
+    <!-- Carousel -->
+    <div class="space-y-4" *ngIf="showCarousel">
+        <h3 class="text-lg font-semibold text-gray-700">Pièces jointes</h3>
+
+        <div class="relative w-full overflow-hidden rounded-lg">
+            <div class="flex transition-transform duration-500 ease-in-out"
+                 [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+                 style="width: 100%;">
+
+                <div *ngFor="let fileImage of justificatif?.results?.files"
+                     class="w-full flex-shrink-0">
+                    <img [src]="fileImage"
+                         alt="Justificatif"
+                         class="w-full h-64 object-cover rounded-lg cursor-pointer hover:scale-105 transition duration-300" />
+                </div>
+            </div>
+
+            <!-- Boutons navigation -->
+            <button (click)="previous()"
+                    class="absolute top-1/2 left-2 transform -translate-y-1/2 px-4 bg-white shadow p-2 rounded-full hover:bg-gray-100">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button (click)="next()"
+                    class="absolute top-1/2 right-2 transform -translate-y-1/2 px-4 bg-white shadow p-2 rounded-full hover:bg-gray-100">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Points indicateurs -->
+        <div class="flex justify-center gap-2 pt-2">
+            <button *ngFor="let img of justificatif?.results?.files; let i = index"
+                    (click)="goToSlide(i)"
+                    [ngClass]="i === currentIndex ? 'bg-[#704111]' : 'bg-gray-400'"
+                    class="w-3 h-3 rounded-full transition-all duration-300">
+            </button>
+        </div>
     </div>
-  </div>
 
-  <!-- Carrousel -->
-  <div class="space-y-2">
-    <h3 class="text-lg font-semibold text-gray-700">Pièces jointes</h3>
-    <div class="relative w-full overflow-hidden rounded-lg">
-      <div class="flex space-x-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory">
-        <img *ngFor="let fileImage of justificatif?.results?.files"
-          [src]="fileImage" alt="Justificatif 1"
-             class="w-64 h-40 object-cover rounded-lg snap-center cursor-pointer hover:scale-105 transition"
-             >
-      </div>
+    <div class="flex justify-end space-x-4 pt-4">
+        <button class="px-6 py-2 bg-[#EFEFEF] text-black rounded hover:bg-gray-200 transition">Accepter</button>
+        <button class="px-6 py-2 bg-[#704111] text-white rounded hover:bg-[#5e3510] transition">Rejeter</button>
     </div>
-  </div>
-
-  <div class="flex justify-end space-x-4 pt-4">
-    <button class="px-6 py-2 bg-[#EFEFEF] text-black rounded transition">
-      Accepter
-    </button>
-    <button class="px-6 py-2 bg-[#704111] text-white rounded transition">
-      Rejeter
-    </button>
-  </div>
-
 </div>

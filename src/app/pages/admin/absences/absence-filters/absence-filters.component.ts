@@ -17,7 +17,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 export class AbsenceFiltersComponent implements OnInit{
   cours: CoursResponseDto[] = [];
   selectedCours: string = '';
-  selectedEtat: string = '';
+  selectedEtat: string = 'tous';
   selectedDate: string = '';
 
   constructor(private coursService: CoursService) {
@@ -42,8 +42,8 @@ export class AbsenceFiltersComponent implements OnInit{
     this.emitFilters();
   }
 
-  onEtatChange(event: Event): void {
-    this.selectedEtat = (event.target as HTMLSelectElement).value;
+  onEtatChange(etat: string): void {
+    this.selectedEtat = etat;
     this.emitFilters();
   }
 

@@ -2,14 +2,29 @@
   <!-- Filtre par Etat -->
   <div>
     <label class="block text-sm font-semibold mb-1">État</label>
-    <select
-      [(ngModel)] = "selectedEtat"
-      (ngModelChange)="emitFilters()"
-      class="px-3 py-1 rounded border border-gray-300 bg-white">
-      <option value="">— Tous —</option>
-      <option value="true">Justifié</option>
-      <option value="false">Non Justifié</option>
-    </select>
+    <div class="flex gap-2 flex-wrap">
+      <button
+        type="button"
+        (click)="onEtatChange('tous')"
+        class="px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
+      >
+        Tous
+      </button>
+      <button
+        type="button"
+        (click)="onEtatChange('true')"
+        class="px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
+      >
+        Justifiée
+      </button>
+      <button
+        type="button"
+        (click)="onEtatChange('false')"
+        class="px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
+      >
+        Non Justifiée
+      </button>
+    </div>
   </div>
 
   <!-- Filtre par Date -->

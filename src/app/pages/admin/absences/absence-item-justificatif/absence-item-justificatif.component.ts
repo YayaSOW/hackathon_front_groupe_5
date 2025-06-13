@@ -1,4 +1,4 @@
-import {Location, NgForOf} from '@angular/common';
+import {Location, NgClass, NgForOf, NgIf} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {JustificatifResponseDto} from '../../../../shared/model/justificatif';
@@ -8,7 +8,9 @@ import {JustificatifService} from '../../../../shared/services/impl/justificatif
 @Component({
   selector: 'app-absence-item-justificatif',
   imports: [
-    NgForOf
+    NgForOf,
+    NgClass,
+    NgIf
   ],
   templateUrl: './absence-item-justificatif.component.html',
   styleUrl: './absence-item-justificatif.component.css'
@@ -44,6 +46,29 @@ export class AbsenceItemJustificatifComponent implements OnInit{
         console.log(this.justificatif.results);
       });
     }
+  }
+  currentIndex = 0;
+
+  showCarousel = false;
+
+  toggleCarousel() {
+    this.showCarousel = !this.showCarousel;
+  }
+
+  get imagesLength(): number {
+    return this.justificatif?.results?.files?.length || 0;
+  }
+
+  next() {
+    this.currentIndex = (this.currentIndex + 1) % this.imagesLength;
+  }
+
+  previous() {
+    this.currentIndex = (this.currentIndex - 1 + this.imagesLength) % this.imagesLength;
+  }
+
+  goToSlide(index: number) {
+    this.currentIndex = index;
   }
 
   onRedirection(): void {

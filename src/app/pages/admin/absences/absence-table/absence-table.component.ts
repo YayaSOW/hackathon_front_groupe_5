@@ -34,7 +34,7 @@ export class AbsenceTableComponent implements OnInit {
   loading = true;
 
   currentCours = '';
-  currentEtat = '';
+  currentEtat = 'tous';
   currentDate = '';
 
   ngOnInit(): void {
@@ -77,7 +77,7 @@ export class AbsenceTableComponent implements OnInit {
 
     const { currentCours: cours, currentEtat: etat, currentDate: date } = this;
     const isCoursActive = cours !== '';
-    const isStateActive = etat !== '';
+    const isStateActive = etat !== 'tous';
     const isDateActive = date !== '';
 
     const page = this.page;
