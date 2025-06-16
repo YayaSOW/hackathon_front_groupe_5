@@ -36,7 +36,6 @@ export class AbsenceItemComponent implements OnInit {
     if (id !== undefined) {
       this.presenceService.getPresenceById(id).subscribe((data) => {
         this.presence = data;
-        console.log(this.presence)
       });
     }
   }

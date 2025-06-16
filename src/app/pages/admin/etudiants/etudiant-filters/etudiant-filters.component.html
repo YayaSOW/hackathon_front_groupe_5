@@ -22,6 +22,10 @@
       <button
         type="button"
         (click)="onStatutChange('tous')"
+        [ngClass]="{
+        'bg-[#cc7a00] border-none text-white': selectedStatut === 'tous',
+        'bg-white hover:bg-gray-200': selectedStatut !== 'tous'
+      }"
         class="px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
       >
         Tous
@@ -29,6 +33,10 @@
       <button
         type="button"
         (click)="onStatutChange('true')"
+        [ngClass]="{
+        'bg-[#cc7a00] border-none text-white': selectedStatut === 'true',
+        'bg-white hover:bg-gray-200': selectedStatut !== 'true'
+      }"
         class="px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
       >
         À jour
@@ -36,6 +44,10 @@
       <button
         type="button"
         (click)="onStatutChange('false')"
+        [ngClass]="{
+        'bg-[#cc7a00] border-none text-white': selectedStatut === 'false',
+        'bg-white hover:bg-gray-200': selectedStatut !== 'false'
+      }"
         class="px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
       >
         Pas à jour

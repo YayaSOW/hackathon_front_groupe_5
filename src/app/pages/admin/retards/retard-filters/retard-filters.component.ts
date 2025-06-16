@@ -25,7 +25,6 @@ export class RetardFiltersComponent implements OnInit {
     this.coursService.getAllCours().subscribe({
       next: (data) => {
         this.cours = data.results;
-        console.log(this.cours);
       },
       error: (err) => {
         console.error(err);

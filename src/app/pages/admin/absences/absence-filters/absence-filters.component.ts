@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CoursResponseDto} from '../../../../shared/model/cours';
-import {NgForOf} from '@angular/common';
+import {NgClass, NgForOf} from '@angular/common';
 import {CoursService} from '../../../../shared/services/impl/cours.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -9,7 +9,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   imports: [
     NgForOf,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgClass
   ],
   templateUrl: './absence-filters.component.html',
   styleUrl: './absence-filters.component.css'
@@ -27,7 +28,6 @@ export class AbsenceFiltersComponent implements OnInit{
     this.coursService.getAllCours().subscribe({
       next: (data) => {
         this.cours = data.results;
-        console.log(this.cours);
       },
       error: (err) => {
         console.error(err);

@@ -1,5 +1,5 @@
 import {Location, NgClass, NgForOf, NgIf} from '@angular/common';
-import {Component, OnInit, Injectable} from '@angular/core';
+import {Component, OnInit, Injectable, signal, computed} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {JustificatifResponseDto} from '../../../../shared/model/justificatif';
 import {RestResponse} from '../../../../shared/model/restResponse';
@@ -55,10 +55,11 @@ export class AbsenceItemJustificatifComponent implements OnInit{
         this.justificatif = data;
 
         this.justificatifId = data.results?.id || '';
-        console.log(this.justificatifId);
       });
     }
   }
+
+  /* Carousel */
   currentIndex = 0;
 
   showCarousel = false;
@@ -83,35 +84,70 @@ export class AbsenceItemJustificatifComponent implements OnInit{
     this.currentIndex = index;
   }
 
-  accepterJustificatif() {
-    const statut: string = 'true';
-    const adminId = this.adminId;
+  /* Apercu plein écran carousel */
+  previewImage: { url: string } | null = null;
 
-    this.justificatifService.traiterJustificatif(this.justificatifId, adminId, statut).subscribe({
-      next: (res) => {
-        console.log('Justificatif accepté avec succès', res);
-      },
-      error: (err) => {
-        console.error('Erreur lors du traitement', err);
-      }
-    });
+  openPreview(image: { url: string }) {
+    this.previewImage = image;
+  }
+
+  closePreview() {
+    this.previewImage = null;
+  }
+
+  /* Traitement du justificatif */
+  private statutTraitement = signal<"true" | "false" | null>(null);
+
+  readonly traitementFait = computed(() => this.statutTraitement() !== null);
+  readonly estAccepte = computed(() => this.statutTraitement() === "true");
+  readonly estRejete = computed(() => this.statutTraitement() === "false");
+
+  accepterJustificatif() {
+    if (!this.traitementFait()) {
+      this.statutTraitement.set("true");
+      const statut: string = 'true';
+      const adminId = this.adminId;
+
+      this.justificatifService.traiterJustificatif(this.justificatifId, statut, adminId).subscribe({
+        next: (res) => {
+          console.log('Justificatif accepté avec succès', res);
+        },
+        error: (err) => {
+          console.error('Erreur lors du traitement', err);
+        }
+      });
+
+      this.onRedirectionAfter();
+
+    }
   }
 
   rejeterJustificatif() {
-    const statut: string = 'false';
-    const adminId = this.adminId;
+    if (!this.traitementFait()) {
+      this.statutTraitement.set("false");
+      const statut: string = 'false';
+      const adminId = this.adminId;
 
-    this.justificatifService.traiterJustificatif(this.justificatifId, adminId, statut).subscribe({
-      next: (res) => {
-        console.log('Justificatif rejeté avec succès', res);
-      },
-      error: (err) => {
-        console.error('Erreur lors du rejet', err);
-      }
-    });
+      this.justificatifService.traiterJustificatif(this.justificatifId, statut, adminId).subscribe({
+        next: (res) => {
+          console.log('Justificatif rejeté avec succès', res);
+        },
+        error: (err) => {
+          console.error('Erreur lors du rejet', err);
+        }
+      });
+
+      this.onRedirectionAfter();
+    }
+
   }
 
+  onRedirectionAfter(): void {
+    this.router.navigate(['absence'])
+  }
+  // Redirection
   onRedirection(): void {
     this.location.back();
   }
+
 }

@@ -1,83 +1,140 @@
-<div class="max-w-2xl mx-auto p-6 bg-white rounded shadow-md space-y-6">
-    <div class="flex items-center gap-4">
-        <button (click)="onRedirection()" class="text-xl cursor-pointer">⬅️</button>
-        <h2 class="text-2xl font-bold text-gray-800">Justificatif d'absence</h2>
+@if (justificatifId !== '') {
+  <div class="max-w-2xl mx-auto p-6 bg-white rounded shadow-md space-y-6">
+    <div class="flex items-center gap-32 mb-8">
+      <button (click)="onRedirection()" class="text-xl cursor-pointer">
+        <i class="fa-solid fa-circle-chevron-left text-3xl text-[#351D15]"></i>
+      </button>
+      <h2 class="text-2xl font-bold text-gray-800 text-center">Justificatif d'absence</h2>
     </div>
 
     <div class="space-y-4">
-        <div>
-            <label class="block text-sm font-medium text-gray-600">Nom de l'étudiant</label>
-            <input type="text" [value]="justificatif?.results?.nom" disabled
-                   class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
-        </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Nom de l'étudiant</label>
+        <input type="text" [value]="justificatif?.results?.nom" disabled
+               class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
+      </div>
 
-        <div>
-            <label class="block text-sm font-medium text-gray-600">Classe</label>
-            <input type="text" [value]="justificatif?.results?.classe" disabled
-                   class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
-        </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Classe</label>
+        <input type="text" [value]="justificatif?.results?.classe" disabled
+               class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
+      </div>
 
-        <div>
-            <label class="block text-sm font-medium text-gray-600">Matricule</label>
-            <input type="text" [value]="justificatif?.results?.matricule" disabled
-                   class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
-        </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Matricule</label>
+        <input type="text" [value]="justificatif?.results?.matricule" disabled
+               class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
+      </div>
 
-        <div>
-            <label class="block text-sm font-medium text-gray-600">Motif</label>
-            <input type="text" [value]="justificatif?.results?.motif" disabled
-                   class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
-        </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Motif</label>
+        <input type="text" [value]="justificatif?.results?.motif" disabled
+               class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-600 cursor-not-allowed" />
+      </div>
     </div>
 
     <!-- Toggle bouton -->
     <div class="text-right">
-        <button (click)="toggleCarousel()"
-                class="px-4 py-2 bg-[#351D15] text-white rounded hover:bg-[#5e3510] transition">
-            {{ showCarousel ? 'Masquer les pièces jointes' : 'Afficher les pièces jointes' }}
-        </button>
+      <button (click)="toggleCarousel()"
+              class="px-4 py-2 bg-[#351D15] text-white rounded hover:bg-[#5e3510] transition">
+        {{ showCarousel ? 'Masquer les pièces jointes' : 'Afficher les pièces jointes' }}
+      </button>
     </div>
 
     <!-- Carousel -->
     <div class="space-y-4" *ngIf="showCarousel">
-        <h3 class="text-lg font-semibold text-gray-700">Pièces jointes</h3>
+      <h3 class="text-lg font-semibold text-gray-700">Pièces jointes</h3>
 
-        <div class="relative w-full overflow-hidden rounded-lg">
-            <div class="flex transition-transform duration-500 ease-in-out"
-                 [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
-                 style="width: 100%;">
-
-                <div *ngFor="let fileImage of justificatif?.results?.files"
-                     class="w-full flex-shrink-0">
-                    <img [src]="fileImage"
-                         alt="Justificatif"
-                         class="w-full h-64 object-cover rounded-lg cursor-pointer hover:scale-105 transition duration-300" />
-                </div>
-            </div>
-
-            <!-- Boutons navigation -->
-            <button (click)="previous()"
-                    class="absolute top-1/2 left-2 transform -translate-y-1/2 px-4 bg-white shadow p-2 rounded-full hover:bg-gray-100">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <button (click)="next()"
-                    class="absolute top-1/2 right-2 transform -translate-y-1/2 px-4 bg-white shadow p-2 rounded-full hover:bg-gray-100">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
+      <div class="relative w-full overflow-hidden rounded-lg">
+        <div class="flex transition-transform duration-500 ease-in-out"
+             [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+             style="width: 100%;">
+          <div *ngFor="let fileImage of justificatif?.results?.files"
+               class="w-full flex-shrink-0">
+            <img [src]="fileImage"
+                 alt="Justificatif"
+                 (click)="openPreview(fileImage)"
+                 class="w-full h-64 object-cover rounded-lg cursor-pointer hover:scale-105 transition duration-300" />
+          </div>
         </div>
 
-        <!-- Points indicateurs -->
-        <div class="flex justify-center gap-2 pt-2">
-            <button *ngFor="let img of justificatif?.results?.files; let i = index"
-                    (click)="goToSlide(i)"
-                    [ngClass]="i === currentIndex ? 'bg-[#704111]' : 'bg-gray-400'"
-                    class="w-3 h-3 rounded-full transition-all duration-300">
-            </button>
-        </div>
+        <!-- Boutons navigation -->
+        <button (click)="previous()"
+                class="absolute top-1/2 left-2 transform -translate-y-1/2 px-4 bg-white shadow p-2 rounded-full hover:bg-gray-100">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button (click)="next()"
+                class="absolute top-1/2 right-2 transform -translate-y-1/2 px-4 bg-white shadow p-2 rounded-full hover:bg-gray-100">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Points indicateurs -->
+      <div class="flex justify-center gap-2 pt-2">
+        <button *ngFor="let img of justificatif?.results?.files; let i = index"
+                (click)="goToSlide(i)"
+                [ngClass]="i === currentIndex ? 'bg-[#704111]' : 'bg-gray-400'"
+                class="w-3 h-3 rounded-full transition-all duration-300">
+        </button>
+      </div>
     </div>
 
-    <div class="flex justify-end space-x-4 pt-4">
-        <button (click)="accepterJustificatif()" class="px-6 py-2 bg-[#EFEFEF] text-black rounded hover:bg-gray-200 transition">Accepter</button>
-        <button (click)="rejeterJustificatif()" class="px-6 py-2 bg-[#704111] text-white rounded hover:bg-[#5e3510] transition">Rejeter</button>
+    <!-- Aperçu plein écran -->
+    <div *ngIf="previewImage"
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
+      <div class="relative max-w-3xl w-full">
+        <button (click)="closePreview()"
+                class="absolute top-4 right-2 text-white bg-black bg-opacity-50 rounded-full px-3.5 py-2 cursor-pointer hover:bg-opacity-70 transition">
+          ✕
+        </button>
+        <img [src]="previewImage" alt="Aperçu" class="w-full max-h-screen shadow-lg object-contain rounded" />
+      </div>
     </div>
-</div>
+
+    <p class="text-gray-700 font-medium">
+      Traitement :
+      <span
+        *ngIf="estAccepte()"
+        [ngClass]="{
+        'text-green-500': estAccepte()
+      }"
+      >Accepté</span>
+      <span
+        *ngIf="estRejete()"
+        [ngClass]="{
+        'text-red-500': estRejete()
+      }"
+      >Rejeté</span>
+      <span
+        *ngIf="!traitementFait()"
+        [ngClass]="{
+        'text-orange-500': !traitementFait()
+      }"
+      >En attente</span>
+    </p>
+
+    <div class="flex justify-end space-x-4 pt-4" *ngIf="!traitementFait()">
+      <button
+        (click)="accepterJustificatif()"
+        [disabled]="traitementFait()"
+        class="px-6 py-2 bg-[#EFEFEF] text-black rounded hover:bg-gray-200 transition">Accepter</button>
+      <button
+        (click)="rejeterJustificatif()"
+        [disabled]="traitementFait()"
+        class="px-6 py-2 bg-[#704111] text-white rounded hover:bg-[#5e3510] transition">Rejeter</button>
+    </div>
+  </div>
+} @else {
+  <button (click)="onRedirection()" class="text-xl cursor-pointer">
+    <i class="fa-solid fa-circle-chevron-left text-3xl text-[#351D15]"></i>
+  </button>
+  <div class="flex flex-col items-center gap-8 justify-center h-full bg-gray-100">
+    <div class="cube-loader">
+      <div class="cube cube1"></div>
+      <div class="cube cube2"></div>
+      <div class="cube cube4"></div>
+      <div class="cube cube3"></div>
+    </div>
+    <div class="text-xl font-medium">Aucun justificatif</div>
+  </div>
+}

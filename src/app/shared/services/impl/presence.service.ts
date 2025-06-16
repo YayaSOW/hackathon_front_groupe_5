@@ -40,12 +40,12 @@ export class PresenceService extends GenericService<Presence> implements IPresen
     return this.httpClient.get<RestResponse<PresenceResponseDto>>(`${environment.apiUrl}/presences/${id}`);
   }
 
-  getAllPresencesByTypeAndEtatAndCoursAndDate(type: string, etat: string, coursId: string, date: string, page: number, size: number): Observable<RestResponse<PresenceResponseDto[]>> {
-    return this.httpClient.get<RestResponse<PresenceResponseDto[]>>(`${environment.apiUrl}/presences/type=${type}/etat=${etat}/cours/${coursId}/date/${date}?page=${page}&size=${size}`);
+  getAllPresencesByTypeAndEtatAndCoursAndDate(type: string, coursId: string, etat: string, date: string, page: number, size: number): Observable<RestResponse<PresenceResponseDto[]>> {
+    return this.httpClient.get<RestResponse<PresenceResponseDto[]>>(`${environment.apiUrl}/presences/type=${type}/cours=${coursId}/etat=${etat}/date=${date}?page=${page}&size=${size}`);
   }
 
   getAllPresencesByTypeAndCoursAndDate(type: string, coursId: string, date: string, page: number, size: number): Observable<RestResponse<PresenceResponseDto[]>> {
-    return this.httpClient.get<RestResponse<PresenceResponseDto[]>>(`${environment.apiUrl}/presences/type=${type}/cours/${coursId}/date/${date}?page=${page}&size=${size}`);
+    return this.httpClient.get<RestResponse<PresenceResponseDto[]>>(`${environment.apiUrl}/presences/type=${type}/cours=${coursId}/date=${date}?page=${page}&size=${size}`);
   }
 
 

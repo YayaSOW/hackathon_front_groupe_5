@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ClasseResponseDto} from '../../../../shared/model/classe';
-import {NgForOf} from '@angular/common';
+import {NgClass, NgForOf} from '@angular/common';
 import {ClasseService} from '../../../../shared/services/impl/classe.service';
 import {FormsModule} from '@angular/forms';
 
@@ -8,7 +8,8 @@ import {FormsModule} from '@angular/forms';
   selector: 'app-etudiant-filters',
   imports: [
     NgForOf,
-    FormsModule
+    FormsModule,
+    NgClass
   ],
   templateUrl: './etudiant-filters.component.html',
   styleUrl: './etudiant-filters.component.css',

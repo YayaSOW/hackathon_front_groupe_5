@@ -3,3 +3,23 @@
 @theme {
   --font-poppins: "Poppins", sans-serif;
 }
+
+@layer components {
+  .cube-loader {
+    @apply relative w-12 h-12 transform rotate-[45deg] scale-110;
+  }
+
+  .cube {
+    @apply absolute w-5 h-5 bg-[#351D15] animate-[cubeAnim_1.8s_infinite];
+  }
+
+  .cube1 { top: 0; left: 0; animation-delay: 0s; }
+  .cube2 { top: 0; right: 0; animation-delay: 0.3s; }
+  .cube3 { bottom: 0; right: 0; animation-delay: 0.6s; }
+  .cube4 { bottom: 0; left: 0; animation-delay: 0.9s; }
+}
+
+@keyframes cubeAnim {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.3; }
+}

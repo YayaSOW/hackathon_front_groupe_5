@@ -6,6 +6,10 @@
       <button
         type="button"
         (click)="onEtatChange('tous')"
+        [ngClass]="{
+        'bg-[#cc7a00] border-none text-white': selectedEtat === 'tous',
+        'bg-white hover:bg-gray-200': selectedEtat !== 'tous'
+      }"
         class="px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
       >
         Tous
@@ -13,6 +17,10 @@
       <button
         type="button"
         (click)="onEtatChange('true')"
+        [ngClass]="{
+        'bg-[#cc7a00] border-none text-white': selectedEtat === 'true',
+        'bg-white hover:bg-gray-200': selectedEtat !== 'true'
+      }"
         class="px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
       >
         Justifiée
@@ -20,6 +28,10 @@
       <button
         type="button"
         (click)="onEtatChange('false')"
+        [ngClass]="{
+        'bg-[#cc7a00] border-none text-white': selectedEtat === 'false',
+        'bg-white hover:bg-gray-200': selectedEtat !== 'false'
+      }"
         class="px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-200"
       >
         Non Justifiée

@@ -86,13 +86,13 @@ export class AbsenceTableComponent implements OnInit {
     let observable$;
 
     if (isCoursActive && isStateActive && isDateActive) {
-      observable$ = this.presenceService.getAllPresencesByTypeAndEtatAndCoursAndDate(this.selectedType as any, etat, cours, date, page, size);
+      observable$ = this.presenceService.getAllPresencesByTypeAndEtatAndCoursAndDate(this.selectedType as any, cours, etat, date, page, size);
     } else if (isCoursActive) {
       observable$ = this.presenceService.getAllPresencesByTypeAndCours(this.selectedType as any, cours, page, size);
     } else if (isStateActive) {
       observable$ = this.presenceService.getAllPresencesByTypeAndEtat(this.selectedType as any, etat, page, size);
     } else if (isDateActive) {
-      observable$ = this.presenceService.getAllPresencesByTypeAndDate(this.selectedType as any, etat, page, size);
+      observable$ = this.presenceService.getAllPresencesByTypeAndDate(this.selectedType as any, date, page, size);
     } else {
       observable$ = this.presenceService.getAllPresencesByType(this.selectedType as any, page, size);
     }
